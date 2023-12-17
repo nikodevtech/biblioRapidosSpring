@@ -28,9 +28,9 @@ public class EmailServicioImpl implements IEmailServicio {
 	            MimeMessage mensaje = javaMailSender.createMimeMessage();
 	            MimeMessageHelper helper = new MimeMessageHelper(mensaje, true, "UTF-8");
 
-	            helper.setFrom("biblioteca@gmail.com"); //AQUI VA EL EMAIL DEL .PROPERTIES
+	            helper.setFrom("@gmail.com"); //AQUI VA EL EMAIL DEL .PROPERTIES
 	            helper.setTo(emailDestino);
-	            helper.setSubject("RESTABLECER CONTRASEÑA");
+	            helper.setSubject("RESTABLECER CONTRASEÑA BIBLIOTECA");
 
 	            String urlDominio = "http://localhost:8080";
 	            String urlDeRecuperacion = String.format("%s/auth/recuperar?token=%s", urlDominio, token);

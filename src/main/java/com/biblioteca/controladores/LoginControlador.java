@@ -54,13 +54,13 @@ public class LoginControlador {
 	public String registrarPost(@ModelAttribute UsuarioDTO usuarioDTO, Model model) {
 
 		UsuarioDTO nuevoUsuario = usuarioService.registrar(usuarioDTO);
-
+		//En el servicio setea el dni a null si ya existe el email que se intenta registrar
 		if (nuevoUsuario != null && nuevoUsuario.getDniUsuario() != null) {
-			// Registro exitoso ya que no se encuentra registrado ni el dni ni el email
+			// Registro exitoso ya que ni el dni ni el email se encuentra registrado 
 			model.addAttribute("mensajeRegistroExitoso", "Registro del nuevo usuario OK");
 			return "login";
 		} else {
-			// Se verifica si el DNI ya existe
+			// Se verifica si el DNI ya existe para mostrar error personalizado en la vista
 			if (usuarioDTO.getDniUsuario() == null) {
 				model.addAttribute("mensajeErrorDni", "Ya existe un usuario con ese DNI");
 				return "registro";

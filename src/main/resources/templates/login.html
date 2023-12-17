@@ -39,7 +39,7 @@
 		</form>
 	</div>
 	<script th:if="${not #strings.isEmpty(mensajeRegistroExitoso)}">
-	       mostrarNotificacion("¡Registro exitoso!", "Ahora puede iniciar sesión", 'success');
+	    mostrarNotificacion("¡Registro exitoso!", "Ahora puede iniciar sesión", 'success');
 	</script>
 	<script th:if="${not #strings.isEmpty(mensajeExitoMail)}">
 	    mostrarNotificacion("¡Email enviado!", "Se ha enviado a su direccion un correo de recuperación", 'info');

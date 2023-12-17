@@ -33,11 +33,11 @@
 			</div>
 		</div>
 	</div>
-	<div id="mensajeErrorToken" th:text="${mensajeErrorToken}" style="display:none;"></div>
+	<div id="mensajeErrorToken" th:text="${mensajeErrorTokenValidez}" style="display:none;"></div>
 	<script>
-	    const mensajeRegistroExitoso = document.getElementById('mensajeErrorToken').innerText;
+	    const mensajeErrorToken = document.getElementById('mensajeErrorToken').innerText;
 	
-	    if (mensajeRegistroExitoso.trim() !== '') {
+	    if (mensajeErrorToken.trim() !== '') {
 	    mostrarNotificacion("¡Error!", "Token no válido o usuario no encontrado", 'error');
 	    }
 	</script>

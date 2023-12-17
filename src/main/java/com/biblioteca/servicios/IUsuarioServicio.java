@@ -58,7 +58,7 @@ public interface IUsuarioServicio {
 	 * @param usuario El usuario al que se le establecera la nueva contraseña
 	 * @return true si el proceso se ha realizado correctamente, false en caso contrario
 	 */
-	public boolean modificarPassConToken(UsuarioDTO usuario);
+	public boolean modificarContraseñaConToken(UsuarioDTO usuario);
 
 
 

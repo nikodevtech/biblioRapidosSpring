@@ -53,7 +53,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 			boolean yaExisteElDNI = repositorio.existsByDniUsuario(userDto.getDniUsuario());
 
 			if (yaExisteElDNI) {
-				userDto.setDniUsuario(null); // Se elimina el DNI para controlar el error
+				userDto.setDniUsuario(null); // Se elimina el DNI para controlar el error en controlador
 				return userDto;
 			}
 
@@ -82,7 +82,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 				// Generar el token y establecer la fecha de expiración
 				String token = passwordEncoder.encode(RandomStringUtils.random(30));
 				Calendar fechaExpiracion = Calendar.getInstance();
-				fechaExpiracion.add(Calendar.MINUTE, 30);
+				fechaExpiracion.add(Calendar.MINUTE, 1);
 				// Actualizar el usuario con el nuevo token y la fecha de expiración
 				usuarioExistente.setToken(token);
 				usuarioExistente.setExpiracionToken(fechaExpiracion);
@@ -91,7 +91,8 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 				repositorio.save(usuarioExistente);
 
 				//Enviar el correo de recuperación
-				emailServicio.enviarEmailRecuperacion(usuarioExistente.getEmailUsuario(),usuarioExistente.getNombreUsuario(), token);
+				String nombreUsuario = usuarioExistente.getNombreUsuario()+" "+usuarioExistente.getApellidosUsuario();
+				emailServicio.enviarEmailRecuperacion(emailUsuario, nombreUsuario, token);
 				
 				return true;
 
@@ -108,14 +109,11 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 	}
 	
 	@Override
-	public boolean modificarPassConToken(UsuarioDTO usuario) {
+	public boolean modificarContraseñaConToken(UsuarioDTO usuario) {
 		
 		Usuario usuarioExistente = repositorio.findByToken(usuario.getToken());
 		
 		if(usuarioExistente != null) {
-			if (usuarioExistente.getExpiracionToken().before(Calendar.getInstance())) {
-				return false;
-			}
 			String nuevaContraseña = passwordEncoder.encode(usuario.getPassword());
 			usuarioExistente.setClaveUsuario(nuevaContraseña);
 			usuarioExistente.setToken(null); //Se setea a null para invalidar el token ya consumido al cambiar de password
