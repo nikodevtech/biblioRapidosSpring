@@ -82,7 +82,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 				// Generar el token y establecer la fecha de expiración
 				String token = passwordEncoder.encode(RandomStringUtils.random(30));
 				Calendar fechaExpiracion = Calendar.getInstance();
-				fechaExpiracion.add(Calendar.MINUTE, 1);
+				fechaExpiracion.add(Calendar.MINUTE, 10);
 				// Actualizar el usuario con el nuevo token y la fecha de expiración
 				usuarioExistente.setToken(token);
 				usuarioExistente.setExpiracionToken(fechaExpiracion);
@@ -138,14 +138,15 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 		}		
 		
 	}
-
 	
-	//ESTOS METODO NO SE USAN DE MOMENTO
 	@Override
 	public Usuario buscarPorEmail(String email) {
 		return repositorio.findFirstByEmailUsuario(email);
 	}
 
+	
+	
+	//ESTOS METODO NO SE USAN DE MOMENTO
 	@Override
 	public boolean buscarPorDni(String dni) {
 		return repositorio.existsByDniUsuario(dni);

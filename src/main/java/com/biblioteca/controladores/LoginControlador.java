@@ -1,14 +1,16 @@
 package com.biblioteca.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.biblioteca.dao.Usuario;
 import com.biblioteca.dto.UsuarioDTO;
-import com.biblioteca.servicios.UsuarioServicioImpl;
+import com.biblioteca.servicios.IUsuarioServicio;
 
 /**
  * Clase que ejerce de controlador de la vista de login/registro para gestionar las
@@ -18,7 +20,7 @@ import com.biblioteca.servicios.UsuarioServicioImpl;
 public class LoginControlador {
 
 	@Autowired
-	private UsuarioServicioImpl usuarioService;
+	private IUsuarioServicio usuarioServicio;
 
 	/**
 	 * Gestiona la solicitud HTTP GET para /auth/login y muestra la página de inicio de sesión
@@ -53,7 +55,7 @@ public class LoginControlador {
 	@PostMapping("/auth/registrar")
 	public String registrarPost(@ModelAttribute UsuarioDTO usuarioDTO, Model model) {
 
-		UsuarioDTO nuevoUsuario = usuarioService.registrar(usuarioDTO);
+		UsuarioDTO nuevoUsuario = usuarioServicio.registrar(usuarioDTO);
 		//En el servicio setea el dni a null si ya existe el email que se intenta registrar
 		if (nuevoUsuario != null && nuevoUsuario.getDniUsuario() != null) {
 			// Registro exitoso ya que ni el dni ni el email se encuentra registrado 
@@ -76,7 +78,10 @@ public class LoginControlador {
 	 * @return La vista de home.html
 	 */
 	@GetMapping("/privada/home")
-	public String loginCorrecto() {
+	public String loginCorrecto(Model model, Authentication authentication) {
+		Usuario usuario = usuarioServicio.buscarPorEmail(authentication.getName());
+		String nombreUsuario = usuario.getNombreUsuario() + " " + usuario.getApellidosUsuario();
+		model.addAttribute("nombreUsuario", nombreUsuario);
 		return "home";
 	}
 

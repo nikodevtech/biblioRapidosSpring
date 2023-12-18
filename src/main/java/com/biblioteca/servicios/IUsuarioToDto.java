@@ -10,7 +10,7 @@ import com.biblioteca.dto.UsuarioDTO;
 public interface IUsuarioToDto {
 	
 	/**
-	 * Pasa un usuario DAO en su DTO
+	 * Método que convierte campo a campo un objeto entidad Usuario a usuarioDTO
 	 * @param u El usuario a transformar
 	 * @return El DTO del usuario
 	 */

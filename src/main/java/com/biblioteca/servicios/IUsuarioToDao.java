@@ -11,14 +11,14 @@ import com.biblioteca.dto.UsuarioDTO;
 public interface IUsuarioToDao {
 	
 	/**
-	 * Metodo que convierte un objeto UsuarioDTO a DAO
+	 * Metodo que convierte campo a campo un objeto UsuarioDTO a DAO
 	 * @param ausuarioDTO el objeto usuarioDTO
 	 * @return Usuario convertido a DAO
 	 */
 	public Usuario usuarioToDao(UsuarioDTO usuarioDTO);
 	
 	/**
-	 * Metodo que convierte una lista de objetos UsuarioDTO a lista de DAOs
+	 * Metodo que convierte toda una lista de objetos UsuarioDTO a lista de DAOs
 	 * @param listaUsuarioDTO lista cargadas de objetos usuarioDTO
 	 * @return Lista de usuarios DAO
 	 */
