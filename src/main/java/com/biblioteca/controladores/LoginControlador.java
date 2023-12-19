@@ -50,15 +50,15 @@ public class LoginControlador {
 	 * @param  usuarioDTO El objeto UsuarioDTO que recibe en el modelo y contiene los
 	 *         datos del nuevo usuario.
 	 * @return La vista de inicio de sesión (login.html) si fue exitoso el registro; 
-	 * 		   de lo contrario, la vista de registro de usuario (registrar.html).
+	 * 		   de lo contrario, la vista de registro de usuario (registro.html).
 	 */
 	@PostMapping("/auth/registrar")
 	public String registrarPost(@ModelAttribute UsuarioDTO usuarioDTO, Model model) {
 
 		UsuarioDTO nuevoUsuario = usuarioServicio.registrar(usuarioDTO);
-		//En el servicio setea el dni a null si ya existe el email que se intenta registrar
+		
 		if (nuevoUsuario != null && nuevoUsuario.getDniUsuario() != null) {
-			// Registro exitoso ya que ni el dni ni el email se encuentra registrado 
+			// Si el usuario y el DNI no son null es que el registro se completo correctamente
 			model.addAttribute("mensajeRegistroExitoso", "Registro del nuevo usuario OK");
 			return "login";
 		} else {

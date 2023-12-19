@@ -45,21 +45,21 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 			// Comprueba si ya existe un usuario con el email que quiere registrar
 			Usuario usuarioDaoByEmail = repositorio.findFirstByEmailUsuario(userDto.getEmailUsuario());
 
-			if (usuarioDaoByEmail != null) { // Ya está registrado
-				return null;
+			if (usuarioDaoByEmail != null) { 
+				return null; // Si no es null es que ya está registrado
 			}
 
-			// Comprueba si hay un usuario por el DNI que quiere registrar
+			// Ahora se comprueba si hay un usuario por el DNI que quiere registrar
 			boolean yaExisteElDNI = repositorio.existsByDniUsuario(userDto.getDniUsuario());
 
 			if (yaExisteElDNI) {
-				userDto.setDniUsuario(null); // Se elimina el DNI para controlar el error en controlador
+				// Si es que ya hay un usuario con ese dni se setea a null para controlar el error en controlador
+				userDto.setDniUsuario(null); 
 				return userDto;
 			}
 
-			// No existe el usuario con el email y el dni a registrar
+			// Si llega a esta línea es que no existe el usuario con el email y el dni a registrar
 			userDto.setClaveUsuario(passwordEncoder.encode(userDto.getClaveUsuario()));
-			// Se pasa el DTO a DAO y se inserta en la base de datos
 			Usuario usuarioDao = toDao.usuarioToDao(userDto);
 			usuarioDao.setFchAltaUsuario(Calendar.getInstance());
 			repositorio.save(usuarioDao);
@@ -79,7 +79,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 			Usuario usuarioExistente = repositorio.findFirstByEmailUsuario(emailUsuario);
 	
 			if (usuarioExistente != null) {
-				// Generar el token y establecer la fecha de expiración
+				// Generar el token y establece la fecha de expiración
 				String token = passwordEncoder.encode(RandomStringUtils.random(30));
 				Calendar fechaExpiracion = Calendar.getInstance();
 				fechaExpiracion.add(Calendar.MINUTE, 10);

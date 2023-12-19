@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
  * mapea con esta 1:1 y ejerce como modelo virtual de la tabla en la aplicación.
  */
 @Entity
-@Table(name = "usuarios")
+@Table(name = "usuarios", schema = "gbp_operacional")
 public class Usuario {
 
 	// ATRIBUTOS
@@ -42,10 +42,10 @@ public class Usuario {
 	@Column(name = "clave_usuario", nullable = false, length = 100)
 	private String claveUsuario;
 
-	@Column(name = "fch_alta_usuario", nullable = true)
+	@Column(name = "fch_alta_usuario", nullable = true, updatable = false)
 	private Calendar fchAltaUsuario ;
 
-	@Column(name = "fch_baja_usuario", nullable = true)
+	@Column(name = "fch_baja_usuario", nullable = true, updatable = false)
 	private Calendar fchBajaUsuario;
 
 	@Column(name = "token_recuperacion", nullable = true, length = 100)

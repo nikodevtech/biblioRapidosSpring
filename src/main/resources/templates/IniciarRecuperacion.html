@@ -31,14 +31,14 @@
 		</div>
 	</nav>
 	<div class="contenedor form-olvidado">
-		<p class="titulo">Olvidaste la contraseña</p>
+		<p class="titulo">Restablecer la contraseña</p>
 		<form class="form" th:action="@{/auth/iniciarRecuperacion}" enctype="multipart/form-data" th:object="${usuarioDTO}" method="post">
 			<input type="email" th:field="*{emailUsuario}" class="form-control" placeholder="Email"/>
 			<div class="text-right mt-1">
 				<button type="submit" class="form-btn">Recuperar</button>
 			</div>
 			<div class="mi-recuadro">
-				<div>Le enviaremos un email con un enlace para modifcar su contraseña.</div>
+				<div>Le enviaremos un email con un enlace para modificar su contraseña.</div>
 			</div>
 		</form>
 	</div>

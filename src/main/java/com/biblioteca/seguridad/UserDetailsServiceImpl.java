@@ -13,8 +13,9 @@ import com.biblioteca.repositorios.UsuarioRepositorio;
 import com.biblioteca.dao.Usuario;
 
 /**
- * Clase que implementa la interfaz UserDetailsService encargada de
- * procesar las solicitudes de autenticación del usuario.
+ * Para que spring gestione la autentiación y la autorización de la aplicación,
+ * es necesario una clase en el proyecto que implemente la interfaz UserDetailsService y
+ * sobre escribir el método loadUserByUsername de la misma.
  */
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
