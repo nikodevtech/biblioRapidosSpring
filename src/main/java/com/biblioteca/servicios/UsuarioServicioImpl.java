@@ -1,6 +1,7 @@
 package com.biblioteca.servicios;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,5 +156,10 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 	@Override
 	public Usuario buscarPorId(long id) {
 		return repositorio.findById(id).orElse(null);
+	}
+
+	@Override
+	public List<UsuarioDTO> buscarTodos() {	
+		return toDto.listaUsuarioToDto(repositorio.findAll());
 	}
 }

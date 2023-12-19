@@ -1,5 +1,7 @@
 package com.biblioteca.servicios;
 
+import java.util.List;
+
 import com.biblioteca.dao.Usuario;
 import com.biblioteca.dto.UsuarioDTO;
 
@@ -15,4 +17,11 @@ public interface IUsuarioToDto {
 	 * @return El DTO del usuario
 	 */
 	public UsuarioDTO usuarioToDto(Usuario u);
+	
+	/**
+	 * Metodo que convierte todos los objetos entidad usuario DAO a una lista UsuarioDTO 
+	 * @param listaUsuario
+	 * @return
+	 */
+	public List<UsuarioDTO> listaUsuarioToDto(List<Usuario> listaUsuario);
 }

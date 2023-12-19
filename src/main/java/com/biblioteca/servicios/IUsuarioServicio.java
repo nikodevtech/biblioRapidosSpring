@@ -1,5 +1,7 @@
 package com.biblioteca.servicios;
 
+import java.util.List;
+
 import com.biblioteca.dao.Usuario;
 import com.biblioteca.dto.UsuarioDTO;
 
@@ -36,6 +38,12 @@ public interface IUsuarioServicio {
 	 * @return true si el usuario existe, false en caso contrario
 	 */
 	public boolean buscarPorDni(String dni);
+	
+	/**
+	 * Busca todos los usuarios registrados
+	 * @return la lista de todos los usuariosDTO
+	 */
+	public List<UsuarioDTO> buscarTodos();
 	
 
 	/**
