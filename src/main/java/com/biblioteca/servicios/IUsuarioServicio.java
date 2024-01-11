@@ -68,6 +68,14 @@ public interface IUsuarioServicio {
 	 */
 	public boolean modificarContraseñaConToken(UsuarioDTO usuario);
 
+	/**
+	 * Elimina un usuario por su identificador
+	 * @param id del usuario
+	 * @return el usuario eliminado o null si no existe
+	 */
+	public Usuario eliminar(long id);
+
+
 
 
 }

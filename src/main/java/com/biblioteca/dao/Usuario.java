@@ -53,6 +53,9 @@ public class Usuario {
 
 	@Column(name = "expiracion_token", nullable = true, length = 100)
 	private Calendar expiracionToken;
+	
+	@Column(name = "rol", nullable = true, length = 20)
+	private String rol;
 
 	/*
 	 * @Column(name="id_acceso") private long idAcceso;
@@ -70,6 +73,7 @@ public class Usuario {
 		this.emailUsuario = email_usuario;
 		this.claveUsuario = clave_usuario;
 	}
+	
 
 	public Usuario() {
 		super();
@@ -159,12 +163,21 @@ public class Usuario {
 	public void setExpiracionToken(Calendar expiracionToken) {
 		this.expiracionToken = expiracionToken;
 	}
+	
+	public String getRol() {
+		return rol;
+	}
+	
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
 
 	// METODOS
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(apellidosUsuario, claveUsuario, dniUsuario, emailUsuario, expiracionToken, fchAltaUsuario,
-				fchBajaUsuario, idUsuario, nombreUsuario, tlfUsuario, token);
+				fchBajaUsuario, idUsuario, nombreUsuario, rol, tlfUsuario, token);
 	}
 
 	@Override
@@ -182,9 +195,11 @@ public class Usuario {
 				&& Objects.equals(expiracionToken, other.expiracionToken)
 				&& Objects.equals(fchAltaUsuario, other.fchAltaUsuario)
 				&& Objects.equals(fchBajaUsuario, other.fchBajaUsuario) && idUsuario == other.idUsuario
-				&& Objects.equals(nombreUsuario, other.nombreUsuario) && Objects.equals(tlfUsuario, other.tlfUsuario)
-				&& Objects.equals(token, other.token);
+				&& Objects.equals(nombreUsuario, other.nombreUsuario) && Objects.equals(rol, other.rol)
+				&& Objects.equals(tlfUsuario, other.tlfUsuario) && Objects.equals(token, other.token);
 	}
+	
+
 
 	@Override
 	public String toString() {
@@ -192,7 +207,7 @@ public class Usuario {
 				+ ", apellidosUsuario=" + apellidosUsuario + ", tlfUsuario=" + tlfUsuario + ", emailUsuario="
 				+ emailUsuario + ", claveUsuario=" + claveUsuario + ", fchAltaUsuario=" + fchAltaUsuario
 				+ ", fchBajaUsuario=" + fchBajaUsuario + ", token=" + token + ", expiracionToken=" + expiracionToken
-				+ "]";
+				+ ", rol=" + rol + "]";
 	}
 
 }

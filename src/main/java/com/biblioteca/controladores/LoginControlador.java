@@ -1,16 +1,21 @@
 package com.biblioteca.controladores;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.biblioteca.dao.Usuario;
 import com.biblioteca.dto.UsuarioDTO;
 import com.biblioteca.servicios.IUsuarioServicio;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Clase que ejerce de controlador de la vista de login/registro para gestionar las
@@ -80,9 +85,36 @@ public class LoginControlador {
 	@GetMapping("/privada/home")
 	public String loginCorrecto(Model model, Authentication authentication) {
 		Usuario usuario = usuarioServicio.buscarPorEmail(authentication.getName());
-		String nombreUsuario = usuario.getNombreUsuario() + " " + usuario.getApellidosUsuario();
-		model.addAttribute("nombreUsuario", nombreUsuario);
+		String email = usuario.getEmailUsuario();
+		model.addAttribute("nombreUsuario", email);
+		System.out.println(authentication.getAuthorities());
 		return "home";
 	}
+	
+	@GetMapping("/privada/listado")
+	public String listadoUsuarios(Model model, HttpServletRequest request) {
+		List<UsuarioDTO> usuarios = usuarioServicio.buscarTodos();
+		System.out.println(usuarios);
+		model.addAttribute("usuarios", usuarios);
+		if(request.isUserInRole("ROLE_ADMIN")) {
+			return "listado";	
+		} 
+		return "home";
+	}
+	
+	@GetMapping("/privada/eliminar/{id}")
+	public String eliminarUsuario(@PathVariable Long id, Model model, HttpServletRequest request) {
+		Usuario usuario = usuarioServicio.buscarPorId(id);
+		List<UsuarioDTO> usuarios = usuarioServicio.buscarTodos();
+		if(request.isUserInRole("ROLE_ADMIN") && usuario.getRol().equals("ROLE_ADMIN")) {
+			model.addAttribute("noSePuedeEliminar", "No se puede eliminar a un admin");
+			model.addAttribute("usuarios", usuarios);
+			return "listado";
+		}
+		usuarioServicio.eliminar(id);
+		return "redirect:/privada/listado";
+		
+	}
+	
 
 }

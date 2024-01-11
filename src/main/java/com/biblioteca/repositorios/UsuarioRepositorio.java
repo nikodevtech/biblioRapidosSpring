@@ -33,5 +33,12 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 	 * @return el usuario buscado por el token
 	 */
 	public Usuario findByToken(String token);
+	
+	/**
+	 * Checkea si existe un usuario con el nombre de usuario especificado.
+	 * @param nombreUsuario El nombre de usuario del usuario a buscar.
+	 * @return true si existe un usuario con el nombre de usuario especificado, false en caso contrario.
+	 */
+	public boolean existsByNombreUsuario(String nombreUsuario);
 
 }

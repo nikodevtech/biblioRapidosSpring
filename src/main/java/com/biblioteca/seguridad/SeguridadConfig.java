@@ -66,7 +66,7 @@ public class SeguridadConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
+            //.csrf(csrf -> csrf.disable())
             // Configura las reglas de autorización para las solicitudes HTTP.
             .authorizeHttpRequests(auth -> 
                 auth

@@ -1,0 +1,7 @@
+com.biblioteca
+com.biblioteca.controladores
+com.biblioteca.dao
+com.biblioteca.dto
+com.biblioteca.repositorios
+com.biblioteca.seguridad
+com.biblioteca.servicios

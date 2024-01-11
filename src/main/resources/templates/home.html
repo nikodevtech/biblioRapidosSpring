@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 <meta charset="UTF-8">
@@ -21,6 +21,7 @@
 				<a>Biblioteca</a>
 			</div>
 			<ul class="nav-links">
+				<li class="mt-3 me-5" sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/privada/listado}">Listado Usuarios</a></li>
 				<li>
 					<form th:action="@{/auth/logout}" method="post" id="logoutForm">
 						<button type="button" class="btn btn-dark mt-2"
@@ -32,7 +33,6 @@
 	</nav>
 
 	<h3 class="text-dark text-center mt-5">Bienvenido <span th:text="${nombreUsuario}">usuario</span></h3>
-	
 </body>
 
 </html>

@@ -43,3 +43,28 @@ function confirmarLogout() {
         }
     });
 }
+function confirmar() {
+    return Swal.fire({
+        title: '¿Estás seguro de que deseas eliminar?',
+        text: 'Esta acción es irreversible.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminar.'
+    }).then((result) => {
+        return result.isConfirmed;
+    });
+}
+
+function confirmarEliminar(event) {
+    const idUsuario = event.currentTarget.getAttribute("data-id");
+    confirmar().then(function (confirmado) {
+        if (confirmado) {
+            window.location.href = 'http://localhost:8080/privada/eliminar/' + idUsuario;
+        }
+    });
+}
+
+
+

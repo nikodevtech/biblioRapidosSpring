@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 	<meta charset="UTF-8">
@@ -18,7 +18,8 @@
 		<div class="menu">
 			<div class="logo"><a>Biblioteca</a></div>
 			<ul class="nav-links">
-				<li><a th:href="@{/auth/login}">Volver</a></li>
+				<li><a th:href="@{/auth/login}" sec:authorize='!isAuthenticated()'>Volver</a></li>
+				<li><a th:href="@{/privada/listado}" sec:authorize='hasAnyRole("ROLE_ADMIN")'>Volver</a></li>
 			</ul>
 		</div>
 	</nav>

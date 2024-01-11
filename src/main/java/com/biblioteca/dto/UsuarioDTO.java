@@ -10,6 +10,7 @@ import java.util.Objects;
 public class UsuarioDTO {
 
 	//ATRIBUTOS
+	private long id;
 	private String nombreUsuario;
 	private String apellidosUsuario;
 	private String dniUsuario;
@@ -36,6 +37,12 @@ public class UsuarioDTO {
 	}
 
 	//GETTERS Y SETTERS
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getDniUsuario() {
 		return dniUsuario;
 	}
