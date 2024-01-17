@@ -84,21 +84,21 @@ public class LoginControlador {
 	 */
 	@GetMapping("/privada/home")
 	public String loginCorrecto(Model model, Authentication authentication) {
-		Usuario usuario = usuarioServicio.buscarPorEmail(authentication.getName());
-		String email = usuario.getEmailUsuario();
-		model.addAttribute("nombreUsuario", email);
+		model.addAttribute("nombreUsuario", authentication.getName());
 		System.out.println(authentication.getAuthorities());
 		return "home";
 	}
 	
 	@GetMapping("/privada/listado")
-	public String listadoUsuarios(Model model, HttpServletRequest request) {
+	public String listadoUsuarios(Model model, HttpServletRequest request,Authentication authentication) {
 		List<UsuarioDTO> usuarios = usuarioServicio.buscarTodos();
 		System.out.println(usuarios);
 		model.addAttribute("usuarios", usuarios);
 		if(request.isUserInRole("ROLE_ADMIN")) {
 			return "listado";	
 		} 
+		model.addAttribute("noAdmin", "No eres admin");
+		model.addAttribute("nombreUsuario", authentication.getName());
 		return "home";
 	}
 	

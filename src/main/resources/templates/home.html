@@ -33,6 +33,9 @@
 	</nav>
 
 	<h3 class="text-dark text-center mt-5">Bienvenido <span th:text="${nombreUsuario}">usuario</span></h3>
+	<script th:if="${not #strings.isEmpty(noAdmin)}">
+	    mostrarNotificacion("¡Prohibido!", "No tiene permisos para acceder a este recurso", 'error');
+	</script>
 </body>
 
 </html>
